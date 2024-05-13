@@ -8,10 +8,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <title>Home | Overwatch API</title>
-      </Head>
-      <main className={poppins.className}>
+      <main className={`${poppins.className} bg-slate-100`}>
         <Component {...pageProps} />
       </main>
     </>
