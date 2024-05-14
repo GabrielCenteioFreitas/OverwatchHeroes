@@ -37,7 +37,7 @@ export default function Home({ heroes }: HomeProps) {
   }
 
   const filteredHeroes = search !== ''
-    ? heroes.filter(hero => hero.key.includes(search.toLocaleLowerCase()))
+    ? heroes.filter(hero => hero.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
     : heroes
   
   return (
@@ -45,12 +45,20 @@ export default function Home({ heroes }: HomeProps) {
       <Head>
         <title>Home | Overwatch Heroes</title>
       </Head>
-      <div className="max-w-7xl min-h-screen mx-auto flex flex-col gap-4 py-6 text-slate-900">
-        <header className="flex items-center justify-between">
-          <HeaderTitle />
+      <div className="
+        w-full px-1.5 py-3
+        sm-480:px-3
+        md:px-5
+        lg:max-w-5xl lg:py-6
+        xl:max-w-6xl
+        2xl:max-w-7xl
+        min-h-screen mx-auto flex flex-col gap-4 text-slate-900"
+      >
+        <header className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center justify-between">
+          <HeaderTitle className="text-3xl sm:text-4xl" />
           
           <div className="
-            min-w-96 flex px-3 py-1 rounded-xl bg-white
+            sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white
             border border-px border-slate-400 focus-within:border-slate-700"
           >
             <input
@@ -66,7 +74,7 @@ export default function Home({ heroes }: HomeProps) {
         <Divider />
 
         <main className="flex-1">
-          <HeroesList heroes={filteredHeroes} />
+          <HeroesList heroes={filteredHeroes} className="grid-cols-1 sm-480:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5" />
         </main>
 
         <Divider />

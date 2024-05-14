@@ -17,7 +17,7 @@ const HeroCard = ({ hero }: HeroCardProps) => {
         <HeroPortrait
           name={hero.name}
           portrait={hero.portrait}
-          size={64}
+          className="w-16"
         />
 
         <div className="grid gap-2">

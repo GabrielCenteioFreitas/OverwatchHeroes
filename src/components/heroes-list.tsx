@@ -17,7 +17,7 @@ const HeroesList = ({ heroes, className }: HeroesListProps) => {
   return ( 
     <div className={twMerge(`grid gap-x-4 gap-y-3 grid-cols-5`, className)}>
       {heroes.map(hero => (
-        <HeroCard hero={hero} />
+        <HeroCard hero={hero} key={hero.key} />
       ))}
     </div>
   );

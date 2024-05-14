@@ -108,21 +108,28 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
       <Head>
         <title>{hero.name} | Overwatch Heroes</title>
       </Head>
-      <div className="max-w-7xl min-h-screen mx-auto flex flex-col gap-4 py-6 text-slate-900">
-        <header className="flex items-center justify-between">
-          <HeaderTitle />
+      <div className="
+        w-full px-1.5 py-3
+        sm-480:px-3
+        md:px-5
+        lg:max-w-5xl lg:py-6
+        xl:max-w-6xl
+        2xl:max-w-7xl
+        min-h-screen mx-auto flex flex-col gap-4 text-slate-900"
+      >
+        <header>
+          <HeaderTitle className="text-3xl" />
         </header>
 
-        <Divider />
+        <Divider className="-mt-2" />
 
-        <div className="flex-1 flex gap-5">
-          <aside className="max-w-80 h-fit space-y-9">
+        <div className="flex-1 flex flex-col sm:flex-row gap-5">
+          <aside className="max-w-80 h-fit mx-auto sm:mx-0 space-y-9">
             <section className="p-3 rounded-2xl border border-px border-slate-400">
               <HeroPortrait
                 name={hero.name}
                 portrait={hero.portrait}
-                size={296}
-                className="rounded-xl"
+                className="rounded-xl w-full h-auto 2xl:w-[296px]"
               />
 
               <Divider className="my-3" />
@@ -176,7 +183,7 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
               </div>
             </section>
 
-            <section>
+            <section className="hidden sm:block">
               <h3 className="text-xl font-semibold">Other {hero.role} heroes</h3>
               <Divider className="opacity-50 mt-1 mb-3" />
 
@@ -192,7 +199,7 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                   <img className="size-full object-cover" src={roleIcon} alt={hero.role} />
                 </div>
               </div>
-              <p>{hero.description}</p>
+              <p className="text-sm text-justify lg:text-md">{hero.description}</p>
             </section>
 
             <section>
@@ -204,35 +211,38 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                 style={{ gridTemplateColumns: `repeat(${hero.abilities.length}, 1fr)` }}
                 >
                   {hero.abilities.map(ability => (
-                    <>
-                      <button
-                        className="grid gap-2 group"
-                        onClick={() => handleChangeCurrentAbility(ability)}
-                      >
-                        <div className="grid gap-2 mx-auto self-start justify-items-center">
-                          <div className={`
-                            grid place-content-center size-20 rounded-full
-                            
-                            ${ability === currentAbility ? "bg-blue-500/90 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75"}
-                            ${hero.abilities.indexOf(ability) === 0 ?("p-2") : "p-4"}
-                          `}>
-                            <img src={ability.icon} alt={ability.name} />
-                          </div>
-                          <span className="text-md font-medium">{ability.name}</span>
+                    <button
+                      key={ability.name}
+                      className="grid gap-2 group"
+                      onClick={() => handleChangeCurrentAbility(ability)}
+                    >
+                      <div className="grid gap-2 mx-auto self-start justify-items-center">
+                        <div className={`
+                          grid place-content-center size-12 2xl:size-20 rounded-full
+                          
+                          ${ability === currentAbility ? "bg-blue-500/90 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75"}
+                          ${hero.abilities.indexOf(ability) === 0 ? "p-0.5 2xl:p-2" : "p-2 2xl:p-4"}
+                        `}>
+                          <img src={ability.icon} alt={ability.name} />
                         </div>
-                        <div className={`w-full h-1 self-end ${ability.name === currentAbility.name ? "bg-blue-500 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75" }`} />
-                      </button>
-                    </>
+                        <span className="hidden md:inline text-sm md:text-md font-medium">{ability.name}</span>
+                      </div>
+                      <div className={`w-full h-1 self-end ${ability.name === currentAbility.name ? "bg-blue-500 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75" }`} />
+                    </button>
                   ))}
                 </div>
-                <div className="mt-1 space-y-0.5">
+                <div className="mt-2 md:mt-1 space-y-2 md:space-y-0.5">
+                  <div className="block md:hidden">
+                    <span className="inline md:hidden text-lg font-semibold leading-none">{currentAbility.name}</span>
+                    <p className="text-sm lg:text-md leading-none">{currentAbility.description}</p>
+                  </div>
                   <video
                     src={currentAbility.video.link?.webm}
                     poster={currentAbility.video.thumbnail}
                     autoPlay
                     loop
                   />
-                  <p className="text-md">{currentAbility.description}</p>
+                  <p className="hidden md:block text-sm lg:text-md">{currentAbility.description}</p>
                 </div>
               </div>
             </section>
@@ -240,13 +250,13 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
             <section>
               <h3 className="mt-3 text-2xl font-bold">Story</h3>
               <Divider className="opacity-50 mt-1 mb-3" />
-              <p>{hero.story.summary}</p>
+              <p className="indent-2 lg:indent-4 text-justify text-sm lg:text-md">{hero.story.summary}</p>
 
               {hero.story.media && (
                 <>
                   {hero.story.media.type === "video"
                   ? (
-                    <div className="grid">
+                    <div className="flex justify-center">
                       <iframe
                         src={(hero.story.media.link).replace(".be", "be.com/embed")}
                         title="YouTube video player"
@@ -254,36 +264,38 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
-                        className="mt-2 w-[35rem] h-[19.6875rem]"
+                        className={`mt-2 w-full h-48 min-[400px]:h-56 sm-480:h-64 max-w-[35rem] max-h-[19.6875rem]`}
                       />
                     </div>
                   ) : (
                     <div className="mt-2 flex gap-1 overflow-x-scroll h-96 no-scrollbar">
-                      {HeroComicsAndShortStories[hero.name.toLocaleLowerCase()].map(heroComicOrShortStory => {
-                        return <img src={heroComicOrShortStory} />
-                      })}
+                      {HeroComicsAndShortStories[hero.name.toLocaleLowerCase()].map(heroComicOrShortStory => 
+                        <img key={heroComicOrShortStory} src={heroComicOrShortStory} />
+                      )}
                     </div>
                   )}
                 </>
               )}
 
               <div className="mt-2">
-                {hero.story.chapters.map(chapter => {
-                  console.log([2, 1][hero.story.chapters.indexOf(chapter) % 2])
-                  return (
-                  <div className="grid">
+                {hero.story.chapters.map(chapter => 
+                  <div className="grid" key={chapter.title}>
                     <h4 className="mt-3 text-xl font-semibold">{chapter.title}</h4>
                     <Divider className="mt-1 mb-3" />
-                    <div className="grid grid-cols-3 gap-3 items-center">
-                      <p className={`indent-4 text-justify col-span-2 ${hero.story.chapters.indexOf(chapter) % 2 === 1 && ("order-last")}`}>{chapter.content}</p>
+                    <div className="grid gap-3 items-center justify-items-center">
+                      <p className={`
+                        indent-2 lg:indent-4 text-justify text-sm lg:text-base
+                      `}>
+                        {chapter.content}
+                      </p>
                       <img
-                        className={`w-full`}
+                        className={`w-full max-w-[40rem]`}
                         src={chapter.picture}
                         alt={chapter.title}
                       />
                     </div>
                   </div>
-                )})}
+                )}
               </div>
             </section>
           </main>
