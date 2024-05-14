@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import HeroCard from "./hero-card";
 
 interface HeroProps {
@@ -9,11 +10,12 @@ interface HeroProps {
 
 interface HeroesListProps {
   heroes: HeroProps[];
+  className?: string;
 }
 
-const HeroesList = ({ heroes }: HeroesListProps) => {
+const HeroesList = ({ heroes, className }: HeroesListProps) => {
   return ( 
-    <div className="grid gap-x-4 gap-y-3 grid-cols-5">
+    <div className={twMerge(`grid gap-x-4 gap-y-3 grid-cols-5`, className)}>
       {heroes.map(hero => (
         <HeroCard hero={hero} />
       ))}

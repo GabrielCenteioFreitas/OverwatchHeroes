@@ -8,14 +8,7 @@ import HeroesList from "@/components/heroes-list";
 
 import Divider from "@/components/divider";
 import Footer from "@/components/footer";
-
-
-interface HeroProps {
-  key: string;
-  name: string;
-  role: string;
-  portrait: string;
-}
+import { HeroProps } from "@/types/hero";
 
 interface HomeProps {
   heroes: HeroProps[];
@@ -27,18 +20,18 @@ export default function Home({ heroes }: HomeProps) {
       <Head>
         <title>Home | Overwatch Heroes</title>
       </Head>
-      <div className="max-w-7xl mx-auto grid gap-4 py-6 text-slate-900">
+      <div className="max-w-7xl min-h-screen mx-auto flex flex-col gap-4 py-6 text-slate-900">
         <Header />
 
         <Divider />
 
-        <main>
+        <main className="flex-1">
           <HeroesList heroes={heroes} />
         </main>
 
         <Divider />
 
-        <Footer />        
+        <Footer />
       </div>
     </>
   );
