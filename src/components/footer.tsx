@@ -5,10 +5,10 @@ const Footer = () => {
   return ( 
     <footer className="flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <a href="https://github.com/GabrielCenteioFreitas">
+        <a href="https://github.com/GabrielCenteioFreitas" target="_blank">
           <ImGithub size={24} />
         </a>
-        <a href="https://www.linkedin.com/in/gabrielcenteiofreitas/">
+        <a href="https://www.linkedin.com/in/gabrielcenteiofreitas/" target="_blank">
           <FaLinkedin size={24} />
         </a>
       </div>

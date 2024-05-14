@@ -1,5 +1,6 @@
 import Divider from "@/components/divider";
 import Footer from "@/components/footer";
+import HeaderTitle from "@/components/header-title";
 import HeroPortrait from "@/components/hero-portrait";
 import HeroesList from "@/components/heroes-list";
 import { api } from "@/services/api";
@@ -109,9 +110,7 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
       </Head>
       <div className="max-w-7xl min-h-screen mx-auto flex flex-col gap-4 py-6 text-slate-900">
         <header className="flex items-center justify-between">
-          <Link href="/">
-            <h1 className="text-4xl font-bold">Overwatch Heroes</h1>
-          </Link>
+          <HeaderTitle />
         </header>
 
         <Divider />
