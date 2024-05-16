@@ -10,13 +10,25 @@ import Footer from "@/components/footer";
 import { HeroProps } from "@/types/hero";
 import HeaderTitle from "@/components/header-title";
 import { useState, ChangeEvent, useEffect } from "react";
+import LanguageSwitch from "@/components/language-switch";
+import { useLanguages } from "@/hooks/useLanguages";
+import { useTranslation } from "react-i18next";
+import { useHeroes } from "@/hooks/useHeroes";
 
-interface HomeProps {
-  heroes: HeroProps[];
-}
-
-export default function Home({ heroes }: HomeProps) {
+export default function Home() {
   const [search, setSearch] = useState('');
+  const [heroes, setHeroes] = useState<HeroProps[]>([])
+  const { currentLanguage } = useLanguages()
+  const { t } = useTranslation();
+  const { getAllHeroes } = useHeroes()
+
+  useEffect(() => {
+    async function getAndSetAllHeroes() {
+      const allHeroesResponse = await getAllHeroes({language: currentLanguage })
+      setHeroes(allHeroesResponse)
+    }
+    getAndSetAllHeroes()
+  }, [currentLanguage])
 
   useEffect(() => {
     const url = new URL(window.location.toString());
@@ -56,18 +68,22 @@ export default function Home({ heroes }: HomeProps) {
       >
         <header className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center justify-between">
           <HeaderTitle className="text-3xl sm:text-4xl" />
-          
-          <div className="
-            sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white
-            border border-px border-slate-400 focus-within:border-slate-700"
-          >
-            <input
-              type="text"
-              onChange={handleSearch}
-              value={search}
-              placeholder="Search for a hero"
-              className="focus:outline-none w-full text-slate-700"  
-            />
+
+          <div className="flex items-center gap-2">
+            <div className="
+              sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white
+              border border-px border-slate-400 focus-within:border-slate-700"
+            >
+              <input
+                type="text"
+                onChange={handleSearch}
+                value={search}
+                placeholder={t("Search.placeholder")}
+                className="focus:outline-none w-full text-slate-700"  
+              />
+            </div>
+
+            <LanguageSwitch />
           </div>
         </header>
 
@@ -85,17 +101,18 @@ export default function Home({ heroes }: HomeProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  var heroes: HeroProps[] = []
-  await api
-    .get<HeroProps[]>(`/heroes`)
-    .then(response => { 
-      heroes = response.data
-    })
+// export const getStaticProps: GetStaticProps = async () => {
+//   var enUsHeroes: HeroProps[] = []
+//   await api
+//     .get<HeroProps[]>(`/heroes?locale=en-us`)
+//     .then(response => { 
+//       enUsHeroes = response.data
+//     })
 
-  return {
-    props: {
-      heroes
-    }
-  }
-}
+//   return {
+//     props: {
+//       enUsHeroes
+//     },
+//     revalidate: 60 * 60 * 24, //24 hours
+//   }
+// }

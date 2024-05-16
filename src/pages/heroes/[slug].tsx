@@ -1,14 +1,21 @@
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
+
 import Divider from "@/components/divider";
 import Footer from "@/components/footer";
 import HeaderTitle from "@/components/header-title";
 import HeroPortrait from "@/components/hero-portrait";
 import HeroesList from "@/components/heroes-list";
-import { api } from "@/services/api";
+import LanguageSwitch from "@/components/language-switch";
+import VideoToGifComponent from "@/components/video-to-gif-component";
+
+import { useHeroes } from "@/hooks/useHeroes";
+import { useLanguages } from "@/hooks/useLanguages";
+
 import { HeroProps } from "@/types/hero";
-import { GetServerSideProps } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+
 
 interface AbilityProps {
   name: string;
@@ -17,12 +24,13 @@ interface AbilityProps {
   video: {
     thumbnail: string;
     link: {
+      mp4: string;
       webm: string;
     };
   };
 }
 
-interface DetailedHeroProps {
+export interface DetailedHeroProps {
   name: string;
   portrait: string;
   role: string;
@@ -48,7 +56,7 @@ interface DetailedHeroProps {
   };
 }
 
-interface RoleProps {
+export interface RoleProps {
   key: string;
   icon: string;
 }
@@ -58,17 +66,63 @@ interface HeroComicsAndShortStoriesProps {
 }
 
 interface HeroPageProps {
-  hero: DetailedHeroProps;
-  roles: RoleProps[];
-  sameRoleHeroes: HeroProps[];
+  slug: string
 }
 
-const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
-  const [currentAbility, setCurrentAbility] = useState<AbilityProps>(hero.abilities[0])
-  
+const HeroPage = ({ slug }: HeroPageProps) => {
+  const [hero, setHero] = useState<DetailedHeroProps>({} as DetailedHeroProps)
+  const [sameRoleHeroes, setSameRoleHeroes] = useState<HeroProps[]>([])
+  const [roles, setRoles] = useState<RoleProps[]>([])
+  const [currentAbility, setCurrentAbility] = useState<AbilityProps>({} as AbilityProps)
+
+  const { currentLanguage } = useLanguages();
+  const { t } = useTranslation();
+  const { getHero, getAllHeroes, getRoles } = useHeroes();
+
   useEffect(() => {
-    setCurrentAbility(hero.abilities[0])
-  }, [hero])
+    async function getAndSetHero() {
+      const heroResponse = await getHero({key: slug, language: currentLanguage })
+      setHero(heroResponse)
+      setCurrentAbility(heroResponse.abilities?.[0])
+    
+      async function getAndSetSameRoleHeroes() {
+        const allHeroesResponse = await getAllHeroes({language: currentLanguage })
+        const filteredAllHeroes = 
+          allHeroesResponse.filter(sameRoleHero =>
+            sameRoleHero.role === heroResponse.role
+            && sameRoleHero.name !== heroResponse.name
+          )
+  
+        setSameRoleHeroes(filteredAllHeroes)
+      }
+      getAndSetSameRoleHeroes()
+    }
+    getAndSetHero()
+
+    async function getAndSetRoles() {
+      const rolesResponse = await getRoles({language: currentLanguage })
+
+      if (rolesResponse) {
+        setRoles(rolesResponse)
+      } else {
+        setRoles([
+          {
+            key: "damage",
+            icon: "https://blz-contentstack-images.akamaized.net/v3/assets/blt9c12f249ac15c7ec/bltc1d840ba007f88a8/62ea89572fdd1011027e605d/Damage.svg?format=webply&quality=90"
+          },
+          {
+            key: "tank",
+            icon: "https://blz-contentstack-images.akamaized.net/v3/assets/blt2477dcaf4ebd440c/bltf0889daa1ef606db/6504cff74d2a764cb7973991/Tank.svg?format=webply&quality=90"
+          },
+          {
+            key: "support",
+            icon: "https://blz-contentstack-images.akamaized.net/v3/assets/blt2477dcaf4ebd440c/blt3ccd5df488163b33/6504cff7fc2ae4d7c50445c4/Support.svg?format=webply&quality=90"
+          }
+        ])
+      }
+    }
+    getAndSetRoles()
+  }, [currentLanguage, slug])
 
   const HeroComicsAndShortStories: HeroComicsAndShortStoriesProps = {
    "mercy": [
@@ -103,8 +157,8 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
     setCurrentAbility(ability)
   }
 
-  return ( 
-    <>
+  return (
+    <> 
       <Head>
         <title>{hero.name} | Overwatch Heroes</title>
       </Head>
@@ -117,36 +171,38 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
         2xl:max-w-7xl
         min-h-screen mx-auto flex flex-col gap-4 text-slate-900"
       >
-        <header>
-          <HeaderTitle className="text-3xl" />
+        <header className="flex justify-between items-center">
+          <HeaderTitle className="text-2xl sm-480:text-3xl md:text-4xl" />
+
+          <LanguageSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
         </header>
 
-        <Divider className="-mt-2" />
+        <Divider className="-mt-3 sm-480:-mt-2" />
 
         <div className="flex-1 flex flex-col sm:flex-row gap-5">
           <aside className="max-w-80 h-fit mx-auto sm:mx-0 space-y-9">
             <section className="p-3 rounded-2xl border border-px border-slate-400">
               <HeroPortrait
-                name={hero.name}
+                name={t(`HeroPage.name`)}
                 portrait={hero.portrait}
                 className="rounded-xl w-full h-auto 2xl:w-[296px]"
               />
 
               <Divider className="my-3" />
 
-              <div className="grid gap-2 text-md leading-none">
+              <div className="grid gap-2 text-base leading-none">
                 <div className="flex gap-1">
-                  <h2 className="font-semibold">Name: </h2>
+                  <h2 className="font-semibold capitalize">{t(`HeroPage.name`)}: </h2>
                   <span>{hero.name}</span>
                 </div>
 
                 <div className="flex gap-1">
-                  <h2 className="font-semibold">Role: </h2>
-                  <span className="capitalize">{hero.role}</span>
+                  <h2 className="font-semibold capitalize">{t(`HeroPage.role`)}: </h2>
+                  <span className="capitalize">{t(`Roles.${hero.role}`)}</span>
                 </div>
 
                 <div className="flex gap-1">
-                  <h2 className="font-semibold">Location: </h2>
+                  <h2 className="font-semibold capitalize">{t(`HeroPage.location`)}: </h2>
                   <span>{hero.location}</span>
                 </div>
               </div>
@@ -157,34 +213,39 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                 grid grid-cols-3 gap-3 text-center p-2
                 border border-px border-slate-400 rounded-xl shadow-sm
               ">
-                <div className="flex flex-col gap-2 text-md">
+                <div className="flex flex-col gap-2 text-base">
                   <div>
-                    <span className="font-semibold">Health</span>
+                    <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.health`)}</span>
                     <div className="w-full h-1 bg-gradient-to-r from-teal-500 to-green-400" />
                   </div>
-                  <span>{hero.hitpoints.health}</span>
+                  <span>{hero.hitpoints?.health}</span>
                 </div>
 
-                <div className="flex flex-col gap-2 text-md">
+                <div className="flex flex-col gap-2 text-base">
                   <div>
-                    <span className="font-semibold">Armor</span>
+                    <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.armor`)}</span>
                     <div className="w-full h-1 bg-gradient-to-r from-orange-300 to-orange-500" />
                   </div>
-                  <span>{hero.hitpoints.armor}</span>
+                  <span>{hero.hitpoints?.armor}</span>
                 </div>
 
-                <div className="flex flex-col gap-2 text-md">
+                <div className="flex flex-col gap-2 text-base">
                   <div>
-                    <span className="font-semibold">Shield</span>
+                    <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.shield`)}</span>
                     <div className="w-full h-1 bg-gradient-to-r from-sky-400 to-blue-500" />
                   </div>
-                  <span>{hero.hitpoints.shields}</span>
+                  <span>{hero.hitpoints?.shields}</span>
                 </div>
               </div>
             </section>
 
             <section className="hidden sm:block">
-              <h3 className="text-xl font-semibold">Other {hero.role} heroes</h3>
+              <h3 className="text-xl font-semibold">
+                { currentLanguage === "pt_br"
+                    ? `Outros heróis de ${t(`Roles.${hero.role}`)}`
+                    : `Other ${hero.role} heroes`
+                }
+              </h3>
               <Divider className="opacity-50 mt-1 mb-3" />
 
               <HeroesList heroes={sameRoleHeroes.slice(0, 7)} className="grid-cols-1" />
@@ -199,20 +260,20 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                   <img className="size-full object-cover" src={roleIcon} alt={hero.role} />
                 </div>
               </div>
-              <p className="text-sm text-justify lg:text-md">{hero.description}</p>
+              <p className="text-sm text-justify lg:text-base">{hero.description}</p>
             </section>
 
             <section>
-              <h3 className="mt-6 text-2xl font-bold">Abilities</h3>
+              <h3 className="mt-6 text-2xl font-bold capitalize">{t(`HeroPage.abilities`)}</h3>
               <Divider className="opacity-50 mt-1 mb-4" />
               <div>
                 <div
                 className={`grid gap-1`}
-                style={{ gridTemplateColumns: `repeat(${hero.abilities.length}, 1fr)` }}
+                style={{ gridTemplateColumns: `repeat(${hero.abilities?.length}, 1fr)` }}
                 >
-                  {hero.abilities.map(ability => (
+                  {hero.abilities?.map(ability => (
                     <button
-                      key={ability.name}
+                      key={ability.icon}
                       className="grid gap-2 group"
                       onClick={() => handleChangeCurrentAbility(ability)}
                     >
@@ -225,34 +286,42 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                         `}>
                           <img src={ability.icon} alt={ability.name} />
                         </div>
-                        <span className="hidden md:inline text-sm md:text-md font-medium">{ability.name}</span>
+                        {/* <span className="hidden md:inline text-sm md:text-base font-medium">
+                          {ability?.name}
+                        </span> */}
                       </div>
-                      <div className={`w-full h-1 self-end ${ability.name === currentAbility.name ? "bg-blue-500 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75" }`} />
+                      <div className={`w-full h-1 self-end ${ability.name === currentAbility?.name ? "bg-blue-500 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75" }`} />
                     </button>
                   ))}
                 </div>
-                <div className="mt-2 md:mt-1 space-y-2 md:space-y-0.5">
-                  <div className="block md:hidden">
-                    <span className="inline md:hidden text-lg font-semibold leading-none">{currentAbility.name}</span>
-                    <p className="text-sm lg:text-md leading-none">{currentAbility.description}</p>
+                {/* <div className="mt-2 md:mt-1 space-y-2 md:space-y-0.5"> */}
+                <div className="mt-2 space-y-2">
+                  {/* <div className="block md:hidden"> */}
+                  <div className="md:space-y-0.5">
+                    <span className="text-lg md:text-xl font-semibold leading-none">
+                      {currentAbility?.name}
+                    </span>
+                    <p className="text-sm lg:text-base leading-none">
+                      {currentAbility?.description}
+                    </p>
                   </div>
-                  <video
-                    src={currentAbility.video.link?.webm}
-                    poster={currentAbility.video.thumbnail}
-                    autoPlay
-                    loop
+                  <VideoToGifComponent
+                    src={currentAbility?.video?.link.mp4}
+                    poster={currentAbility?.video?.thumbnail}
                   />
-                  <p className="hidden md:block text-sm lg:text-md">{currentAbility.description}</p>
+                  {/* <p className="hidden md:block text-sm lg:text-base">
+                    {currentAbility?.description}
+                  </p> */}
                 </div>
               </div>
             </section>
 
             <section>
-              <h3 className="mt-3 text-2xl font-bold">Story</h3>
+              <h3 className="mt-3 text-2xl font-bold capitalize">{t(`HeroPage.story`)}</h3>
               <Divider className="opacity-50 mt-1 mb-3" />
-              <p className="indent-2 lg:indent-4 text-justify text-sm lg:text-md">{hero.story.summary}</p>
+              <p className="indent-2 lg:indent-4 text-justify text-sm lg:text-base">{hero.story?.summary}</p>
 
-              {hero.story.media && (
+              {hero.story?.media && (
                 <>
                   {hero.story.media.type === "video"
                   ? (
@@ -261,10 +330,10 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
                         src={(hero.story.media.link).replace(".be", "be.com/embed")}
                         title="YouTube video player"
                         frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
-                        className={`mt-2 w-full h-48 min-[400px]:h-56 sm-480:h-64 max-w-[35rem] max-h-[19.6875rem]`}
+                        className={`mt-2 w-full h-48 min-[400px]:h-56 sm-480:h-64 max-w-[35rem] lg:h-[19.6875rem]`}
                       />
                     </div>
                   ) : (
@@ -278,7 +347,7 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
               )}
 
               <div className="mt-2">
-                {hero.story.chapters.map(chapter => 
+                {hero.story?.chapters.map(chapter => 
                   <div className="grid" key={chapter.title}>
                     <h4 className="mt-3 text-xl font-semibold">{chapter.title}</h4>
                     <Divider className="mt-1 mb-3" />
@@ -312,36 +381,11 @@ const HeroPage = ({ hero, roles, sameRoleHeroes }: HeroPageProps) => {
 export default HeroPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const key = params?.key;
-  
-  var hero = {} as DetailedHeroProps;
-  await api
-    .get<DetailedHeroProps>(`/heroes/${key}`)
-    .then(response => 
-      hero = response.data
-    )
-    
-  var sameRoleHeroes: HeroProps[] = [];
-  await api
-    .get<HeroProps[]>(`/heroes/`)
-    .then(response => 
-      sameRoleHeroes = response.data.filter(sameRoleHero =>
-        sameRoleHero.role === hero.role && sameRoleHero.name !== hero.name
-      )
-    )
-
-  var roles: RoleProps[] = []
-  await api
-    .get<RoleProps[]>(`/roles`)
-    .then(response => 
-      roles = response.data
-    )
+  const slug = params?.slug
 
   return {
     props: {
-      hero,
-      sameRoleHeroes,
-      roles
+      slug
     }
   }
 }

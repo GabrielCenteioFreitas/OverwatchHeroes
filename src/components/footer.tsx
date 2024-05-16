@@ -1,3 +1,5 @@
+import { useLanguages } from "@/hooks/useLanguages";
+import { useEffect } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import { ImGithub } from "react-icons/im";
 
