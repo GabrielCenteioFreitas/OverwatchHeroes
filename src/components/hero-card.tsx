@@ -13,8 +13,8 @@ const HeroCard = ({ hero }: HeroCardProps) => {
   return ( 
     <Link href={`/heroes/${hero.key}`}>
       <div className={`
-        flex items-center gap-3 py-2 pl-5 pr-3 rounded-xl shadow-sm bg-white dark:bg-slate-700
-        border border-slate-400 dark:border-slate-500 hover:scale-105 transition-transform
+        flex items-center gap-3 py-2 pl-5 pr-3 rounded-xl shadow-sm bg-white dark:bg-slate-800
+        border border-slate-400 dark:border-slate-700 hover:scale-105 transition-transform
         relative overflow-hidden
       `}>
         <HeroPortrait

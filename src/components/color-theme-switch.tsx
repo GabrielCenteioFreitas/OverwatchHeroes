@@ -1,13 +1,13 @@
-import useColorMode from "@/hooks/useColorMode";
+import { useColorTheme } from "@/hooks/useColorTheme";
 import { AiFillMoon } from "react-icons/ai";
 import { BsSunFill } from "react-icons/bs";
 import { twMerge } from "tailwind-merge";
 
-const ThemeSwitch = ({ className }: { className?: string }) => {
-  const { colorMode, setColorMode } = useColorMode();
+const ColorThemeSwitch = ({ className }: { className?: string }) => {
+  const { colorMode, changeColorTheme } = useColorTheme();
 
   const handleToggleThemeClick = () => {
-    setColorMode(
+    changeColorTheme(
       colorMode === "dark"
         ? "light"
         : "dark"
@@ -28,4 +28,4 @@ const ThemeSwitch = ({ className }: { className?: string }) => {
   );
 }
  
-export default ThemeSwitch;
+export default ColorThemeSwitch;

@@ -15,7 +15,7 @@ import { useHeroes } from "@/hooks/useHeroes";
 import { useLanguages } from "@/hooks/useLanguages";
 
 import { HeroProps } from "@/types/hero";
-import ThemeSwitch from "@/components/theme-switch";
+import ColorThemeSwitch from "@/components/color-theme-switch";
 
 
 interface AbilityProps {
@@ -178,7 +178,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
           <div className="flex sm:gap-2 items-center">
             <LanguageSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
 
-            <ThemeSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
+            <ColorThemeSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
           </div>
         </header>
 

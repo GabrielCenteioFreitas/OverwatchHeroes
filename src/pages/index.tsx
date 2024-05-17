@@ -14,7 +14,7 @@ import LanguageSwitch from "@/components/language-switch";
 import { useLanguages } from "@/hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 import { useHeroes } from "@/hooks/useHeroes";
-import ThemeSwitch from "@/components/theme-switch";
+import ColorThemeSwitch from "@/components/color-theme-switch";
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -72,7 +72,7 @@ export default function Home() {
 
           <div className="flex items-center gap-2">
             <div className="
-              sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white dark:bg-slate-700
+              sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white dark:bg-slate-800 dark:focus-within:bg-slate-700
               border border-slate-400 dark:border-slate-500 focus-within:border-slate-700 dark:focus-within:border-slate-200"
             >
               <input
@@ -86,7 +86,7 @@ export default function Home() {
 
             <LanguageSwitch className="shrink-0" />
 
-            <ThemeSwitch className="shrink-0" />
+            <ColorThemeSwitch className="shrink-0" />
           </div>
         </header>
 

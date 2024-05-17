@@ -5,6 +5,7 @@ import { Poppins } from "next/font/google";
 import "../i18n";
 import { LanguagesProvider } from "@/hooks/useLanguages";
 import { HeroesProvider } from "@/hooks/useHeroes";
+import { ColorThemeProvider } from "@/hooks/useColorTheme";
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] })
 
@@ -14,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className={`${poppins.className} bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200`}>
         <LanguagesProvider>
           <HeroesProvider>
-            <Component {...pageProps} />
+            <ColorThemeProvider>
+              <Component {...pageProps} />
+            </ColorThemeProvider>
           </HeroesProvider>
         </LanguagesProvider>
       </main>
