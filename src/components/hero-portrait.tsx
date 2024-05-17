@@ -12,7 +12,7 @@ const HeroPortrait = ({ name, portrait, className }: HeroPortraitProps) => {
       src={portrait}
       alt={name}
       className={twMerge(`
-        rounded-full border border-px border-slate-400 shadow-md
+        rounded-full border border-slate-400 shadow-md
         bg-gradient-to-t from-slate-300 to-slate-500
       `, className)}
     />

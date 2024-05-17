@@ -175,10 +175,10 @@ const HeroPage = ({ slug }: HeroPageProps) => {
         <header className="flex justify-between items-center">
           <HeaderTitle className="text-2xl sm-480:text-3xl md:text-4xl" />
 
-          <div className="flex gap-2 items-center">
+          <div className="flex sm:gap-2 items-center">
             <LanguageSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
 
-            <ThemeSwitch />
+            <ThemeSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
           </div>
         </header>
 
@@ -186,7 +186,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
         <div className="flex-1 flex flex-col sm:flex-row gap-5">
           <aside className="max-w-80 h-fit mx-auto sm:mx-0 space-y-9">
-            <section className="p-3 rounded-2xl border border-px border-slate-400 dark:border-slate-600">
+            <section className="p-3 rounded-2xl border border-slate-400 dark:border-slate-600">
               <HeroPortrait
                 name={t(`HeroPage.name`)}
                 portrait={hero.portrait}
@@ -216,7 +216,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
               <div className="
                 grid grid-cols-3 gap-3 text-center p-2
-                border border-px border-slate-400 dark:border-slate-600 rounded-xl shadow-sm
+                border border-slate-400 dark:border-slate-600 rounded-xl shadow-sm
               ">
                 <div className="flex flex-col gap-2 text-base">
                   <div>
@@ -261,7 +261,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
             <section>
               <div className="flex gap-2">
                 <h2 className="text-3xl font-bold">{hero.name}</h2>
-                <div className="size-8 rounded-full bg-slate-400/75 p-1.5">
+                <div className="size-8 rounded-full bg-slate-400/75 dark:bg-gray-700 p-1.5">
                   <img className="size-full object-cover" src={roleIcon} alt={hero.role} />
                 </div>
               </div>
@@ -286,7 +286,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                         <div className={`
                           grid place-content-center size-12 2xl:size-20 rounded-full
                           
-                          ${ability === currentAbility ? "bg-blue-500/90 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75"}
+                          ${ability === currentAbility ? "bg-blue-500 dark:bg-blue-600" : "bg-slate-400/75 dark:bg-gray-700 group-hover:bg-slate-500/75 dark:group-hover:bg-slate-600"}
                           ${hero.abilities.indexOf(ability) === 0 ? "p-0.5 2xl:p-2" : "p-2 2xl:p-4"}
                         `}>
                           <img src={ability.icon} alt={ability.name} />
@@ -295,7 +295,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                           {ability?.name}
                         </span> */}
                       </div>
-                      <div className={`w-full h-1 self-end ${ability.name === currentAbility?.name ? "bg-blue-500 group-hover:bg-blue-600/90" : "bg-slate-400/75 group-hover:bg-slate-500/75" }`} />
+                      <div className={`w-full h-1 self-end ${ability.name === currentAbility?.name ? "bg-blue-500 dark:bg-blue-600" : "bg-slate-400/75 dark:bg-gray-700 group-hover:bg-slate-500/75 dark:group-hover:bg-slate-600" }`} />
                     </button>
                   ))}
                 </div>
@@ -355,7 +355,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                 {hero.story?.chapters.map(chapter => 
                   <div className="grid" key={chapter.title}>
                     <h4 className="mt-3 text-xl font-semibold">{chapter.title}</h4>
-                    <Divider className="mt-1 mb-3" />
+                    <Divider className="opacity-50 mt-1 mb-3" />
                     <div className="grid gap-3 items-center justify-items-center">
                       <p className={`
                         indent-2 lg:indent-4 text-justify text-sm lg:text-base

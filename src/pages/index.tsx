@@ -73,7 +73,7 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <div className="
               sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white dark:bg-slate-700
-              border border-px border-slate-400 dark:border-slate-500 focus-within:border-slate-700 dark:focus-within:border-slate-200"
+              border border-slate-400 dark:border-slate-500 focus-within:border-slate-700 dark:focus-within:border-slate-200"
             >
               <input
                 type="text"
@@ -84,9 +84,9 @@ export default function Home() {
               />
             </div>
 
-            <LanguageSwitch />
+            <LanguageSwitch className="shrink-0" />
 
-            <ThemeSwitch />
+            <ThemeSwitch className="shrink-0" />
           </div>
         </header>
 
