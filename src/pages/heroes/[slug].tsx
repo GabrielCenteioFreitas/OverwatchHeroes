@@ -175,10 +175,10 @@ const HeroPage = ({ slug }: HeroPageProps) => {
         <header className="flex justify-between items-center">
           <HeaderTitle className="text-2xl sm-480:text-3xl md:text-4xl" />
 
-          <div className="flex sm:gap-2 items-center">
-            <LanguageSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
+          <div className="flex gap-1 sm:gap-2 items-center">
+            <LanguageSwitch className="size-7 md:size-8 shrink-0" />
 
-            <ColorThemeSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
+            <ColorThemeSwitch className="size-7 md:size-8 shrink-0" />
           </div>
         </header>
 

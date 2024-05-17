@@ -14,7 +14,7 @@ const LanguageSwitch = ({ className }: { className?: string }) => {
   return ( 
     <>
       <button
-        className="size-7 md:size-8 rounded-full overflow-hidden"
+        className="size-7 md:size-8 rounded-full overflow-hidden transition-all"
         onClick={handleChangeLanguage}
       >
         {currentLanguage === "en_us" ? (
