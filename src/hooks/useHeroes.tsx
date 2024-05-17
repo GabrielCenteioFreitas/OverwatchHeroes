@@ -3,6 +3,7 @@ import { DetailedHeroProps, RoleProps } from "@/pages/heroes/[slug]";
 import { api } from "@/services/api";
 import { HeroProps } from "@/types/hero";
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { useLanguages } from "./useLanguages";
 
 type LanguageType = "en_us" | "pt_br"
 

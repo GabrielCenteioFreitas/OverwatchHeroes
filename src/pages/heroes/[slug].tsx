@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -79,6 +79,13 @@ const HeroPage = ({ slug }: HeroPageProps) => {
   const { currentLanguage } = useLanguages();
   const { t } = useTranslation();
   const { getHero, getAllHeroes, getRoles } = useHeroes();
+
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+      startTransition(() => {
+          setReady(true);
+      });
+  }, []);
 
   useEffect(() => {
     async function getAndSetHero() {
@@ -246,10 +253,11 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
             <section className="hidden sm:block">
               <h3 className="text-xl font-semibold">
-                { currentLanguage === "pt_br"
+                { ready && (
+                  currentLanguage === "pt_br"
                     ? `Outros heróis de ${t(`Roles.${hero.role}`)}`
                     : `Other ${hero.role} heroes`
-                }
+                )}
               </h3>
               <Divider className="opacity-50 mt-1 mb-3" />
 

@@ -1,7 +1,7 @@
 import i18n from "@/i18n";
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
-type LanguageType = "en_us" | "pt_br"
+export type LanguageType = "en_us" | "pt_br"
 
 interface LanguagesContextData {
   currentLanguage: LanguageType,
@@ -13,7 +13,11 @@ export const LanguagesContext = createContext<LanguagesContextData>(
 )
 
 export function LanguagesProvider({ children }: { children: ReactNode; }) {
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language as LanguageType)
+  const [currentLanguage, setCurrentLanguage] = useState(
+    typeof window !== "undefined"
+      ? localStorage.getItem("language") as LanguageType || "en_us"
+      : "en_us"
+  )
 
   function changeLanguage(language: "en_us" | "pt_br") {
     setCurrentLanguage(language)
@@ -23,7 +27,12 @@ export function LanguagesProvider({ children }: { children: ReactNode; }) {
         : "en"
     )
     i18n.changeLanguage(language)
+    localStorage.setItem("language", language)
   }
+
+  useEffect(() => {
+    changeLanguage(currentLanguage)
+  }, [])
 
   return (
     <LanguagesContext.Provider value={{ currentLanguage, changeLanguage }}>

@@ -1,9 +1,20 @@
-import { useLanguages } from "@/hooks/useLanguages";
+import { LanguageType, useLanguages } from "@/hooks/useLanguages";
+import { Suspense, startTransition, useEffect, useState } from "react";
 import { CircleFlag } from 'react-circle-flags'
 import { twMerge } from "tailwind-merge";
 
 const LanguageSwitch = ({ className }: { className?: string }) => {
   const { currentLanguage, changeLanguage } = useLanguages()
+
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+      startTransition(() => {
+          setReady(true);
+      });
+  }, []);
+  if (!ready) {
+    return <div>Loading...</div>;
+  }
 
   const handleChangeLanguage = () => {
     currentLanguage === "en_us"
@@ -20,7 +31,7 @@ const LanguageSwitch = ({ className }: { className?: string }) => {
         {currentLanguage === "en_us" ? (
           <CircleFlag
             countryCode="br"
-            title="Change language to PT-BR"
+            title={"Change language to PT-BR"}
             className={twMerge("size-full object-cover", className)}
           />
         ) : (
