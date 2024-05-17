@@ -26,8 +26,8 @@
 
 <br>
 <div align="center">
-  
-  [<img alt="Preview do projeto." src=".github/preview.gif" width="85%">](https://overwatchheroes-gabriel-centeio-freitas-projects.vercel.app/)
+
+  [<img alt="Preview do projeto." src=".github/preview2.gif" width="100%">](https://overwatchheroes-gabriel-centeio-freitas-projects.vercel.app/)
 </div>
 
 <h3 align="center">
