@@ -11,7 +11,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <main className={`${poppins.className} bg-slate-100`}>
+      <main className={`${poppins.className} bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200`}>
         <LanguagesProvider>
           <HeroesProvider>
             <Component {...pageProps} />

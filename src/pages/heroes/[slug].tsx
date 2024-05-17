@@ -15,6 +15,7 @@ import { useHeroes } from "@/hooks/useHeroes";
 import { useLanguages } from "@/hooks/useLanguages";
 
 import { HeroProps } from "@/types/hero";
+import ThemeSwitch from "@/components/theme-switch";
 
 
 interface AbilityProps {
@@ -169,19 +170,23 @@ const HeroPage = ({ slug }: HeroPageProps) => {
         lg:max-w-5xl lg:py-6
         xl:max-w-6xl
         2xl:max-w-7xl
-        min-h-screen mx-auto flex flex-col gap-4 text-slate-900"
+        min-h-screen mx-auto flex flex-col gap-4"
       >
         <header className="flex justify-between items-center">
           <HeaderTitle className="text-2xl sm-480:text-3xl md:text-4xl" />
 
-          <LanguageSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
+          <div className="flex gap-2 items-center">
+            <LanguageSwitch className="size-5 sm-480:size-6 sm:size-7 md:size-8" />
+
+            <ThemeSwitch />
+          </div>
         </header>
 
         <Divider className="-mt-3 sm-480:-mt-2" />
 
         <div className="flex-1 flex flex-col sm:flex-row gap-5">
           <aside className="max-w-80 h-fit mx-auto sm:mx-0 space-y-9">
-            <section className="p-3 rounded-2xl border border-px border-slate-400">
+            <section className="p-3 rounded-2xl border border-px border-slate-400 dark:border-slate-600">
               <HeroPortrait
                 name={t(`HeroPage.name`)}
                 portrait={hero.portrait}
@@ -211,12 +216,12 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
               <div className="
                 grid grid-cols-3 gap-3 text-center p-2
-                border border-px border-slate-400 rounded-xl shadow-sm
+                border border-px border-slate-400 dark:border-slate-600 rounded-xl shadow-sm
               ">
                 <div className="flex flex-col gap-2 text-base">
                   <div>
                     <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.health`)}</span>
-                    <div className="w-full h-1 bg-gradient-to-r from-teal-500 to-green-400" />
+                    <div className="w-full h-1 bg-gradient-to-r from-teal-500 to-green-400"/>
                   </div>
                   <span>{hero.hitpoints?.health}</span>
                 </div>
@@ -224,7 +229,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                 <div className="flex flex-col gap-2 text-base">
                   <div>
                     <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.armor`)}</span>
-                    <div className="w-full h-1 bg-gradient-to-r from-orange-300 to-orange-500" />
+                    <div className="w-full h-1 bg-gradient-to-r from-orange-300 to-orange-500 dark:from-orange-500 dark:to-orange-700" />
                   </div>
                   <span>{hero.hitpoints?.armor}</span>
                 </div>
@@ -232,7 +237,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                 <div className="flex flex-col gap-2 text-base">
                   <div>
                     <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.shield`)}</span>
-                    <div className="w-full h-1 bg-gradient-to-r from-sky-400 to-blue-500" />
+                    <div className="w-full h-1 bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-600 dark:to-blue-700" />
                   </div>
                   <span>{hero.hitpoints?.shields}</span>
                 </div>

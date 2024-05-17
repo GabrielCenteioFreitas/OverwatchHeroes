@@ -14,6 +14,7 @@ import LanguageSwitch from "@/components/language-switch";
 import { useLanguages } from "@/hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 import { useHeroes } from "@/hooks/useHeroes";
+import ThemeSwitch from "@/components/theme-switch";
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -64,26 +65,28 @@ export default function Home() {
         lg:max-w-5xl lg:py-6
         xl:max-w-6xl
         2xl:max-w-7xl
-        min-h-screen mx-auto flex flex-col gap-4 text-slate-900"
+        min-h-screen mx-auto flex flex-col gap-4"
       >
         <header className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center justify-between">
           <HeaderTitle className="text-3xl sm:text-4xl" />
 
           <div className="flex items-center gap-2">
             <div className="
-              sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white
-              border border-px border-slate-400 focus-within:border-slate-700"
+              sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white dark:bg-slate-700
+              border border-px border-slate-400 dark:border-slate-500 focus-within:border-slate-700 dark:focus-within:border-slate-200"
             >
               <input
                 type="text"
                 onChange={handleSearch}
                 value={search}
                 placeholder={t("Search.placeholder")}
-                className="focus:outline-none w-full text-slate-700"  
+                className="focus:outline-none w-full text-slate-700 dark:text-slate-200 bg-transparent"  
               />
             </div>
 
             <LanguageSwitch />
+
+            <ThemeSwitch />
           </div>
         </header>
 
