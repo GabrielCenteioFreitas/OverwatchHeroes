@@ -1,40 +1,100 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Overwatch Heroes</h1>
 
-## Getting Started
+<p align="center">
+  <a alt="ReactJS">
+    <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+  </a>
+  <a alt="NextJS">
+    <img src="https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+  </a>
+  <a alt="Typescript">
+    <img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white" />
+  </a>
+  <a alt="TailwindCSS">
+    <img src="https://img.shields.io/badge/TAILWINDCSS-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+  </a>
+  <a alt="Axios">
+    <img src="https://img.shields.io/badge/Axios-5A29E4.svg?style=for-the-badge&logo=Axios&logoColor=white" />
+  </a>
+</p>
 
-First, run the development server:
+<p align="center">
+  <a href="#projeto">Sobre o projeto</a> •
+  <a href="#executando">Executando localmente</a> •
+  <a href="#tecnologias">Tecnologias</a>
+</div>
 
+<br>
+<div align="center">
+  
+  [<img alt="Preview do projeto." src=".github/preview.gif" width="85%">](https://overwatchheroes-gabriel-centeio-freitas-projects.vercel.app/)
+</div>
+
+<h3 align="center">
+  
+  [Ver projeto](https://overwatchheroes-gabriel-centeio-freitas-projects.vercel.app/)
+</h3>
+
+<br>
+
+<a id="projeto"></a>
+## 💻 Sobre o projeto
+
+Esse projeto surgiu da necessidade de treinar e desenvolver minhas habilidades nas tecnologias, principalmente, de ReactJS e NextJS. Objetivando treinar conceitos essenciais das ferramentas, optei por construir uma aplicação simples que consumisse uma API. Além disso, o desenvolvimento de uma ferramenta de busca, opção de mudar o idioma e a adição de um DarkMode fizeram com que eu me aprofundasse nos conteúdos abordados.
+
+Você pode acessar o projeto clicando [aqui](https://overwatchheroes-gabriel-centeio-freitas-projects.vercel.app/).
+
+> **Créditos**:
+> A API utilizada para o projeto foi a [OverfastAPI](https://overfast-api.tekrop.fr/).
+
+<a id="executando"></a>
+## 🔧 Executando localmente
+
+#### 1. Clone o repositório
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/GabrielCenteioFreitas/OverwatchHeroes.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 2. Entre na pasta do projeto
+```bash
+cd OverwatchHeroes
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+#### 3. Instale as dependências
+```bash
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### 4. Inicie o servidor de desenvolvimento
+```bash
+npm start
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### 5. Acesse [http://localhost:3000](http://localhost:3000) para visualizar a aplicação
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<a id="tecnologias"></a>
+## 🚀 Tecnologias
 
-## Learn More
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-To learn more about Next.js, take a look at the following resources:
+- ReactJS
+- NextJS
+- Typescript
+- TailwindCSS
+- Axios
+- OverFast API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Contribuições
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Issues e pull requests são muito bem-vindos!
 
-## Deploy on Vercel
+## 👨🏻‍💻 Autor: Gabriel Centeio Freitas 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<p align="left">
+  <a alt="Github" href="https://github.com/GabrielCenteioFreitas/">
+    <img src="https://img.shields.io/badge/GITHUB-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  <a alt="Linkedin" href="https://www.linkedin.com/in/gabrielcenteiofreitas/">
+    <img src="https://img.shields.io/badge/LINKEDIN-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+</p>
