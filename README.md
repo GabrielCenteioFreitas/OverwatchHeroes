@@ -42,6 +42,8 @@
 
 Esse projeto surgiu da necessidade de treinar e desenvolver minhas habilidades nas tecnologias, principalmente, de ReactJS e NextJS. Objetivando treinar conceitos essenciais das ferramentas, optei por construir uma aplicação simples que consumisse uma API. Além disso, o desenvolvimento de uma ferramenta de busca, opção de mudar o idioma e a adição de um DarkMode fizeram com que eu me aprofundasse nos conteúdos abordados.
 
+Caso queira ver mais detalhes sobre o desenvolvimento do projeto, fiz uma postagem no Linkedin falando sobre, clique [aqui](https://www.linkedin.com/posts/gabrielcenteiofreitas_react-reactjs-nextjs-activity-7197660928765509632-pwLU?utm_source=share&utm_medium=member_desktop) para conferir!
+
 Você pode acessar o projeto clicando [aqui](https://overwatchheroes-gabriel-centeio-freitas-projects.vercel.app/).
 
 > **Créditos**:
