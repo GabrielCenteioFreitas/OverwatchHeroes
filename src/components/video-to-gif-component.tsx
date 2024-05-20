@@ -1,5 +1,6 @@
 import React, { useEffect, useState, startTransition } from 'react';
 import Video from 'next-video';
+import LoadingIcon from './loading-icon';
 
 interface VideoToGifComponentProps {
   src: string;
@@ -7,28 +8,35 @@ interface VideoToGifComponentProps {
 }
 
 const VideoToGifComponent = ({ src, poster }: VideoToGifComponentProps) => {
-    const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(false);
 
-    useEffect(() => {
-        startTransition(() => {
-            setReady(true);
-        });
-    }, []);
+  useEffect(() => {
+      startTransition(() => {
+          setReady(true);
+      });
+  }, []);
 
-    if (!ready) {
-      return <div>Loading...</div>;
-    }
-
+  if (!ready) {
     return (
-      <Video
-        src={src}
-        poster={poster}
-        autoPlay
-        muted
-        loop
-        controls={false}
-      />
+      <div className="w-full h-auto relative">
+        <div className="absolute flex justify-center items-center bg-black/70 w-full h-full">
+          <LoadingIcon className="size-2/12 opacity-70" />
+        </div>
+        <img src={poster} />
+      </div>
     );
+  }
+
+  return (
+    <Video
+      src={src}
+      poster={poster}
+      autoPlay
+      muted
+      loop
+      controls={false}
+    />
+  );
 };
 
 export default VideoToGifComponent;

@@ -15,6 +15,7 @@ import { useLanguages } from "@/hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 import { useHeroes } from "@/hooks/useHeroes";
 import ColorThemeSwitch from "@/components/color-theme-switch";
+import { useQuery } from "react-query";
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -23,13 +24,23 @@ export default function Home() {
   const { t } = useTranslation();
   const { getAllHeroes } = useHeroes()
 
-  useEffect(() => {
-    async function getAndSetAllHeroes() {
-      const allHeroesResponse = await getAllHeroes({language: currentLanguage })
-      setHeroes(allHeroesResponse)
+  const { data, isLoading } = useQuery(
+    ['heroes', currentLanguage],
+    async () => {
+      const response = await getAllHeroes({ language: currentLanguage });
+      return response
+    },
+    {
+      staleTime: 1000 * 60 * 10, // 10 minutes
     }
-    getAndSetAllHeroes()
-  }, [currentLanguage])
+  );
+
+  useEffect(() => {
+    if (!data) {
+      return
+    }
+    setHeroes(data)
+  }, [data])
 
   useEffect(() => {
     const url = new URL(window.location.toString());
