@@ -1,5 +1,4 @@
 import React, { useEffect, useState, startTransition } from 'react';
-import Video from 'next-video';
 import LoadingIcon from './loading-icon';
 
 interface VideoToGifComponentProps {
@@ -28,7 +27,7 @@ const VideoToGifComponent = ({ src, poster }: VideoToGifComponentProps) => {
   }
 
   return (
-    <Video
+    <video
       src={src}
       poster={poster}
       autoPlay
