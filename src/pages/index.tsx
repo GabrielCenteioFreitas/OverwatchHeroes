@@ -18,6 +18,7 @@ import ColorThemeSwitch from "@/components/color-theme-switch";
 import { useQuery } from "react-query";
 import Header from "@/components/header";
 import SearchInput from "@/components/search-input";
+import LoadingScreen from "@/components/loading-screen";
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -86,25 +87,31 @@ export default function Home() {
         2xl:max-w-7xl
         min-h-screen mx-auto flex flex-col gap-4"
       >
-        <Header className="flex-col gap-2 sm:gap-0 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <SearchInput search={search} handleSearch={handleSearch} />
+        {!isLoading ? (
+          <>
+            <Header className="flex-col gap-2 sm:gap-0 sm:flex-row">
+              <div className="flex items-center gap-2">
+                <SearchInput search={search} handleSearch={handleSearch} />
 
-            <LanguageSwitch className="shrink-0" />
+                <LanguageSwitch className="shrink-0" />
 
-            <ColorThemeSwitch className="shrink-0" />
-          </div>
-        </Header>
+                <ColorThemeSwitch className="shrink-0" />
+              </div>
+            </Header>
 
-        <Divider />
+            <Divider />
 
-        <main className="flex-1">
-          <HeroesList heroes={filteredHeroes} className="grid-cols-1 sm-480:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5" />
-        </main>
+            <main className="flex-1">
+              <HeroesList heroes={filteredHeroes} className="grid-cols-1 sm-480:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5" />
+            </main>
 
-        <Divider />
+            <Divider />
 
-        <Footer />
+            <Footer />
+          </>
+        ) : (
+          <LoadingScreen />
+        )}
       </div>
     </>
   );
