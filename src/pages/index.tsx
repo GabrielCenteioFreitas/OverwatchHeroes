@@ -16,6 +16,8 @@ import { useTranslation } from "react-i18next";
 import { useHeroes } from "@/hooks/useHeroes";
 import ColorThemeSwitch from "@/components/color-theme-switch";
 import { useQuery } from "react-query";
+import Header from "@/components/header";
+import SearchInput from "@/components/search-input";
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -68,6 +70,12 @@ export default function Home() {
     <>
       <Head>
         <title>Home | Overwatch Heroes</title>
+
+        <meta
+          name="description"
+          content={t("Home.metaDescription")}
+          key="desc"
+        />
       </Head>
       <div className="
         w-full px-1.5 py-3
@@ -78,28 +86,15 @@ export default function Home() {
         2xl:max-w-7xl
         min-h-screen mx-auto flex flex-col gap-4"
       >
-        <header className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center justify-between">
-          <HeaderTitle className="text-3xl sm:text-4xl" />
-
+        <Header className="flex-col gap-2 sm:gap-0 sm:flex-row">
           <div className="flex items-center gap-2">
-            <div className="
-              sm:min-w-64 md:min-w-96 flex px-3 py-1 rounded-xl bg-white dark:bg-slate-800 dark:focus-within:bg-slate-700
-              border border-slate-400 dark:border-slate-500 focus-within:border-slate-700 dark:focus-within:border-slate-200"
-            >
-              <input
-                type="text"
-                onChange={handleSearch}
-                value={search}
-                placeholder={t("Search.placeholder")}
-                className="focus:outline-none w-full text-slate-700 dark:text-slate-200 bg-transparent"  
-              />
-            </div>
+            <SearchInput search={search} handleSearch={handleSearch} />
 
             <LanguageSwitch className="shrink-0" />
 
             <ColorThemeSwitch className="shrink-0" />
           </div>
-        </header>
+        </Header>
 
         <Divider />
 

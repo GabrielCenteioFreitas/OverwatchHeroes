@@ -8,7 +8,7 @@ const HeaderTitle = ({ className }: { className?: string }) => {
 
   return ( 
     <Link href="/">
-      <h1 className={twMerge("text-4xl font-bold", className)}>
+      <h1 className={twMerge("text-2xl sm-480:text-3xl md:text-4xl font-bold", className)}>
         { t("HeaderTitle.title") }
       </h1>
     </Link>

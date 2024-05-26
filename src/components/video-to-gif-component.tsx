@@ -4,9 +4,10 @@ import LoadingIcon from './loading-icon';
 interface VideoToGifComponentProps {
   src: string;
   poster: string;
+  name: string;
 }
 
-const VideoToGifComponent = ({ src, poster }: VideoToGifComponentProps) => {
+const VideoToGifComponent = ({ src, poster, name }: VideoToGifComponentProps) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const VideoToGifComponent = ({ src, poster }: VideoToGifComponentProps) => {
         <div className="absolute flex justify-center items-center bg-black/70 w-full h-full">
           <LoadingIcon className="size-2/12 opacity-70" />
         </div>
-        <img src={poster} />
+        <img src={poster} alt={name} />
       </div>
     );
   }

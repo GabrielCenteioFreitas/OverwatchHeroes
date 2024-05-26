@@ -1,4 +1,5 @@
 import { LanguageType, useLanguages } from "@/hooks/useLanguages";
+import { t } from "i18next";
 import { Suspense, startTransition, useEffect, useState } from "react";
 import { CircleFlag } from 'react-circle-flags'
 import { twMerge } from "tailwind-merge";
@@ -25,8 +26,9 @@ const LanguageSwitch = ({ className }: { className?: string }) => {
   return ( 
     <>
       <button
-        className="size-7 md:size-8 rounded-full overflow-hidden transition-all"
         onClick={handleChangeLanguage}
+        aria-label={t('Language.ariaLabel')}
+        className="size-7 md:size-8 rounded-full overflow-hidden transition-all"
       >
         {currentLanguage === "en_us" ? (
           <CircleFlag

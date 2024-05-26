@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "npx cross-env ANALYZE=true next build"
   },
   "dependencies": {
+    "@axe-core/react": "^4.9.1",
+    "@next/bundle-analyzer": "^14.2.3",
     "axios": "^1.6.8",
     "i18next": "^23.11.4",
     "next": "14.2.3",

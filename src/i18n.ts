@@ -12,6 +12,9 @@ i18n
     resources: {
       en_us: {
         translation: {
+          Home: {
+            metaDescription: 'Site with information about all the Overwatch characters'
+          },
           HeaderTitle: {
             title: "Overwatch Heroes",
           },
@@ -24,21 +27,42 @@ i18n
             tank: "tank",
           },
           HeroPage: {
-            name: "name",
-            role: "role",
-            location: "location",
-            hitpoints: {
-              health: "health",
-              armor: "armor",
-              shield: "shield",
+            heroInfo: {
+              name: "name",
+              role: "role",
+              location: "location",
+              hitpoints: {
+                health: "health",
+                armor: "armor",
+                shield: "shield",
+              },
+              ariaLabel: "Hero info",
             },
-            abilities: "abilities",
-            story: "story",
-          }
+            otherHeroes: {
+              ariaLabel: "Other heroes with same role",
+            },
+            aboutHero: {
+              abilities: {
+                title: "abilities",
+                ariaLabel: "Change ability"
+              },
+              story: "story",
+              ariaLabel: "About the hero",
+            }
+          },
+          ColorTheme: {
+            ariaLabel: "Toggle theme",
+          },
+          Language: {
+            ariaLabel: "Change language",
+          },
         }
       },
       pt_br: {
         translation: {
+          Home: {
+            metaDescription: 'Site com informações sobre todos os personagens do jogo Overwatch'
+          },
           HeaderTitle: {
             title: "Heróis Overwatch",
           },
@@ -51,17 +75,35 @@ i18n
             tank: "tanque",
           },
           HeroPage: {
-            name: "nome",
-            role: "função",
-            location: "localização",
-            hitpoints: {
-              health: "vida",
-              armor: "armadura",
-              shield: "escudo",
+            heroInfo: {
+              name: "nome",
+              role: "função",
+              location: "localização",
+              hitpoints: {
+                health: "vida",
+                armor: "armadura",
+                shield: "escudo",
+              },
+              ariaLabel: "Informações do herói",
             },
-            abilities: "habilidades",
-            story: "história",
-          }
+            otherHeroes: {
+              ariaLabel: "Outros heróis de mesma função",
+            },
+            aboutHero: {
+              abilities: {
+                title: "habilidades",
+                ariaLabel: "Mudar habilidade",
+              },
+              story: "história",
+              ariaLabel: "Sobre o herói",
+            },
+          },
+          ColorTheme: {
+            ariaLabel: "Mudar o tema",
+          },
+          Language: {
+            ariaLabel: "Mudar o idioma",
+          },
         }
       },
     },

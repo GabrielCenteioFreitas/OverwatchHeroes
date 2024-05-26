@@ -18,6 +18,7 @@ import { HeroProps } from "@/types/hero";
 import ColorThemeSwitch from "@/components/color-theme-switch";
 import { useQuery } from "react-query";
 import LoadingIcon from "@/components/loading-icon";
+import Header from "@/components/header";
 
 
 interface AbilityProps {
@@ -195,6 +196,16 @@ const HeroPage = ({ slug }: HeroPageProps) => {
     <>
       <Head>
         <title>{hero.name} | Overwatch Heroes</title>
+
+        <meta
+          name="description"
+          content={
+            currentLanguage === "pt_br"
+            ? `Página contendo informações sobre a personagem ${hero.name} do jogo Overwatch`
+            : `Page containing information about the Overwatch character ${hero.name}`
+          }
+          key="desc"
+        />
       </Head>
       <div className="
         w-full px-1.5 py-3
@@ -207,23 +218,21 @@ const HeroPage = ({ slug }: HeroPageProps) => {
       >
         {!heroResponse.isLoading ? (
           <>
-            <header className="flex justify-between items-center">
-              <HeaderTitle className="text-2xl sm-480:text-3xl md:text-4xl" />
-
+            <Header>
               <div className="flex gap-1 sm:gap-2 items-center">
                 <LanguageSwitch className="size-7 md:size-8 shrink-0" />
 
                 <ColorThemeSwitch className="size-7 md:size-8 shrink-0" />
               </div>
-            </header>
+            </Header>
 
             <Divider className="-mt-3 sm-480:-mt-2" />
 
             <div className="flex-1 flex flex-col sm:flex-row gap-5">
               <aside className="max-w-80 h-fit mx-auto sm:mx-0 space-y-9">
-                <section className="p-3 rounded-2xl border border-slate-400 dark:border-slate-600">
+                <section className="p-3 rounded-2xl border border-slate-400 dark:border-slate-600" aria-label={t("HeroPage.heroInfo.ariaLabel")}>
                   <HeroPortrait
-                    name={t(`HeroPage.name`)}
+                    name={t(`HeroPage.heroInfo.name`)}
                     portrait={hero.portrait}
                     className="rounded-xl w-full h-auto 2xl:w-[296px]"
                   />
@@ -232,17 +241,17 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
                   <div className="grid gap-2 text-base leading-none">
                     <div className="flex gap-1">
-                      <h2 className="font-semibold capitalize">{t(`HeroPage.name`)}: </h2>
+                      <h2 className="font-semibold capitalize">{t(`HeroPage.heroInfo.name`)}: </h2>
                       <span>{hero.name}</span>
                     </div>
 
                     <div className="flex gap-1">
-                      <h2 className="font-semibold capitalize">{t(`HeroPage.role`)}: </h2>
+                      <h2 className="font-semibold capitalize">{t(`HeroPage.heroInfo.role`)}: </h2>
                       <span className="capitalize">{t(`Roles.${hero.role}`)}</span>
                     </div>
 
                     <div className="flex gap-1">
-                      <h2 className="font-semibold capitalize">{t(`HeroPage.location`)}: </h2>
+                      <h2 className="font-semibold capitalize">{t(`HeroPage.heroInfo.location`)}: </h2>
                       <span>{hero.location}</span>
                     </div>
                   </div>
@@ -255,7 +264,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                   ">
                     <div className="flex flex-col gap-2 text-base">
                       <div>
-                        <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.health`)}</span>
+                        <span className="font-semibold capitalize">{t(`HeroPage.heroInfo.hitpoints.health`)}</span>
                         <div className="w-full h-1 bg-gradient-to-r from-teal-500 to-green-400"/>
                       </div>
                       <span>{hero.hitpoints?.health}</span>
@@ -263,7 +272,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
                     <div className="flex flex-col gap-2 text-base">
                       <div>
-                        <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.armor`)}</span>
+                        <span className="font-semibold capitalize">{t(`HeroPage.heroInfo.hitpoints.armor`)}</span>
                         <div className="w-full h-1 bg-gradient-to-r from-orange-300 to-orange-500 dark:from-orange-500 dark:to-orange-700" />
                       </div>
                       <span>{hero.hitpoints?.armor}</span>
@@ -271,7 +280,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
                     <div className="flex flex-col gap-2 text-base">
                       <div>
-                        <span className="font-semibold capitalize">{t(`HeroPage.hitpoints.shield`)}</span>
+                        <span className="font-semibold capitalize">{t(`HeroPage.heroInfo.hitpoints.shield`)}</span>
                         <div className="w-full h-1 bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-600 dark:to-blue-700" />
                       </div>
                       <span>{hero.hitpoints?.shields}</span>
@@ -279,7 +288,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                   </div>
                 </section>
 
-                <section className="hidden sm:block">
+                <section className="hidden sm:block" aria-label={t("HeroPage.otherHeroes.ariaLabel")}>
                   <h3 className="text-xl font-semibold">
                     {ready && (
                       currentLanguage === "pt_br"
@@ -299,7 +308,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                 </section>
               </aside>
 
-              <main className="flex-1">
+              <main className="flex-1" aria-label={t("HeroPage.aboutHero.ariaLabel")}>
                 <section>
                   <div className="flex gap-2">
                     <h2 className="text-3xl font-bold">{hero.name}</h2>
@@ -311,7 +320,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                 </section>
 
                 <section>
-                  <h3 className="mt-6 text-2xl font-bold capitalize">{t(`HeroPage.abilities`)}</h3>
+                  <h3 className="mt-6 text-2xl font-bold capitalize">{t(`HeroPage.aboutHero.abilities.title`)}</h3>
                   <Divider className="opacity-50 mt-1 mb-4" />
                   <div>
                     <div
@@ -321,6 +330,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                       {hero.abilities?.map(ability => (
                         <button
                           key={ability.icon}
+                          aria-label={t('HeroPage.aboutHero.abilities.ariaLabel')}
                           className="grid gap-2 group"
                           onClick={() => handleChangeCurrentAbility(ability)}
                         >
@@ -350,13 +360,14 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                       <VideoToGifComponent
                         src={currentAbility?.video?.link.mp4}
                         poster={currentAbility?.video?.thumbnail}
+                        name={currentAbility.name}
                       />
                     </div>
                   </div>
                 </section>
 
                 <section>
-                  <h3 className="mt-3 text-2xl font-bold capitalize">{t(`HeroPage.story`)}</h3>
+                  <h3 className="mt-3 text-2xl font-bold capitalize">{t(`HeroPage.aboutHero.story`)}</h3>
                   <Divider className="opacity-50 mt-1 mb-3" />
                   <p className="indent-2 lg:indent-4 text-justify text-sm lg:text-base">{hero.story?.summary}</p>
 
@@ -378,7 +389,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
                       ) : (
                         <div className="mt-2 flex gap-1 overflow-x-scroll h-96 no-scrollbar">
                           {HeroComicsAndShortStories[hero.name.toLocaleLowerCase()].map(heroComicOrShortStory => 
-                            <img key={heroComicOrShortStory} src={heroComicOrShortStory} />
+                            <img key={heroComicOrShortStory} src={heroComicOrShortStory} alt={heroComicOrShortStory} />
                           )}
                         </div>
                       )}
