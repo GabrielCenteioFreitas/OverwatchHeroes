@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
-import Divider from "@/components/Divider-temp";
-import Footer from "@/components/Footer-temp";
+import Divider from "@/components/Divider";
+import Footer from "@/components/Footer";
 import HeroPortrait from "@/components/HeroCard/HeroPortrait";
 import HeroesList from "@/components/HeroesList";
 import LanguageSwitch from "@/components/LanguageSwitch";
