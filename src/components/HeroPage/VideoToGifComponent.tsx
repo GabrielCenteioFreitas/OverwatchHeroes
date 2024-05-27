@@ -1,5 +1,5 @@
 import React, { useEffect, useState, startTransition } from 'react';
-import LoadingIcon from './loading-icon';
+import LoadingIcon from '../Loading/LoadingIcon';
 
 interface VideoToGifComponentProps {
   src: string;

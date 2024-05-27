@@ -1,7 +1,7 @@
-import Divider from "./divider";
-import Footer from "./footer";
-import Header from "./header";
-import LoadingIcon from "./loading-icon";
+import Divider from "../Divider";
+import Footer from "../Footer";
+import Header from "../Header/Header";
+import LoadingIcon from "./LoadingIcon";
 
 const LoadingScreen = () => {
   return ( 

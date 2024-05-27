@@ -1,24 +1,20 @@
-import { GetStaticProps } from "next";
 import Head from "next/head";
 
-import { api } from "@/services/api";
+import HeroesList from "@/components/HeroesList";
 
-import HeroesList from "@/components/heroes-list";
-
-import Divider from "@/components/divider";
-import Footer from "@/components/footer";
-import { HeroProps } from "@/types/hero";
-import HeaderTitle from "@/components/header-title";
+import Divider from "@/components/Divider";
+import Footer from "@/components/Footer";
+import { HeroProps } from "@/types/Hero";
 import { useState, ChangeEvent, useEffect } from "react";
-import LanguageSwitch from "@/components/language-switch";
+import LanguageSwitch from "@/components/LanguageSwitch";
 import { useLanguages } from "@/hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 import { useHeroes } from "@/hooks/useHeroes";
-import ColorThemeSwitch from "@/components/color-theme-switch";
+import ColorThemeSwitch from "@/components/ColorThemeSwitch";
 import { useQuery } from "react-query";
-import Header from "@/components/header";
-import SearchInput from "@/components/search-input";
-import LoadingScreen from "@/components/loading-screen";
+import Header from "@/components/Header/Header";
+import SearchInput from "@/components/Header/SearchInput";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
 
 export default function Home() {
   const [search, setSearch] = useState('');

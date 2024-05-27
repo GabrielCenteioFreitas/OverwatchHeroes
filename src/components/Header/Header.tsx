@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import HeaderTitle from "./header-title";
+import HeaderTitle from "./HeaderTitle";
 import { twMerge } from "tailwind-merge";
 
 interface HeaderProps {

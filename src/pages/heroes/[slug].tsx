@@ -3,23 +3,22 @@ import { useTranslation } from "react-i18next";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
-import Divider from "@/components/divider";
-import Footer from "@/components/footer";
-import HeaderTitle from "@/components/header-title";
-import HeroPortrait from "@/components/hero-portrait";
-import HeroesList from "@/components/heroes-list";
-import LanguageSwitch from "@/components/language-switch";
-import VideoToGifComponent from "@/components/video-to-gif-component";
+import Divider from "@/components/Divider";
+import Footer from "@/components/Footer";
+import HeroPortrait from "@/components/HeroCard/HeroPortrait";
+import HeroesList from "@/components/HeroesList";
+import LanguageSwitch from "@/components/LanguageSwitch";
+import VideoToGifComponent from "@/components/HeroPage/VideoToGifComponent";
 
 import { useHeroes } from "@/hooks/useHeroes";
 import { useLanguages } from "@/hooks/useLanguages";
 
-import { HeroProps } from "@/types/hero";
-import ColorThemeSwitch from "@/components/color-theme-switch";
+import { HeroProps } from "@/types/Hero";
+import ColorThemeSwitch from "@/components/ColorThemeSwitch";
 import { useQuery } from "react-query";
-import LoadingIcon from "@/components/loading-icon";
-import Header from "@/components/header";
-import LoadingScreen from "@/components/loading-screen";
+import LoadingIcon from "@/components/Loading/LoadingIcon";
+import Header from "@/components/Header/Header";
+import LoadingScreen from "@/components/Loading/LoadingScreen";
 
 
 interface AbilityProps {
