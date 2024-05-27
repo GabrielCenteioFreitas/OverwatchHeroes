@@ -4,7 +4,7 @@ import HeroesList from "@/components/HeroesList";
 
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
-import { HeroProps } from "@/types/Hero";
+import { HeroProps } from "@/types/hero";
 import { useState, ChangeEvent, useEffect } from "react";
 import LanguageSwitch from "@/components/LanguageSwitch";
 import { useLanguages } from "@/hooks/useLanguages";

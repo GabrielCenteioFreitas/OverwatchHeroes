@@ -13,7 +13,7 @@ import VideoToGifComponent from "@/components/HeroPage/VideoToGifComponent";
 import { useHeroes } from "@/hooks/useHeroes";
 import { useLanguages } from "@/hooks/useLanguages";
 
-import { HeroProps } from "@/types/Hero";
+import { HeroProps } from "@/types/hero";
 import ColorThemeSwitch from "@/components/ColorThemeSwitch";
 import { useQuery } from "react-query";
 import LoadingIcon from "@/components/Loading/LoadingIcon";

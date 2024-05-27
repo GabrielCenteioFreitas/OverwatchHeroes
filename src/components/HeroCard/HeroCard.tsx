@@ -1,6 +1,6 @@
 import Link from "next/link";
 import HeroPortrait from "./HeroPortrait";
-import { HeroProps } from "@/types/Hero";
+import { HeroProps } from "@/types/hero";
 import { useTranslation } from "react-i18next";
 
 interface HeroCardProps {
