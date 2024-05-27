@@ -1,5 +1,5 @@
-import Divider from "../Divider";
-import Footer from "../Footer";
+import Divider from "../Divider-temp";
+import Footer from "../Footer-temp";
 import Header from "../Header/Header";
 import LoadingIcon from "./LoadingIcon";
 
