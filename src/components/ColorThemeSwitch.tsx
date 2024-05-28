@@ -4,6 +4,7 @@ import { useState, useEffect, startTransition } from "react";
 import { AiFillMoon } from "react-icons/ai";
 import { BsSunFill } from "react-icons/bs";
 import { twMerge } from "tailwind-merge";
+import LoadingIcon from "./Loading/LoadingIcon";
 
 const ColorThemeSwitch = ({ className }: { className?: string }) => {
   const { colorTheme, changeColorTheme } = useColorTheme();
@@ -15,7 +16,7 @@ const ColorThemeSwitch = ({ className }: { className?: string }) => {
       });
   }, []);
   if (!ready) {
-    return <div>Loading...</div>;
+    return <LoadingIcon className="size-5 md:size-6" />;
   }
 
   const handleToggleThemeClick = () => {

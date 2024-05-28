@@ -3,6 +3,7 @@ import { t } from "i18next";
 import { Suspense, startTransition, useEffect, useState } from "react";
 import { CircleFlag } from 'react-circle-flags'
 import { twMerge } from "tailwind-merge";
+import LoadingIcon from "./Loading/LoadingIcon";
 
 const LanguageSwitch = ({ className }: { className?: string }) => {
   const { currentLanguage, changeLanguage } = useLanguages()
@@ -14,7 +15,7 @@ const LanguageSwitch = ({ className }: { className?: string }) => {
       });
   }, []);
   if (!ready) {
-    return <div>Loading...</div>;
+    return <LoadingIcon className="size-5 md:size-6" />;
   }
 
   const handleChangeLanguage = () => {
