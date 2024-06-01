@@ -47,16 +47,14 @@ export default function Home() {
     setSearch(searchParam);
   }, []);
 
-  function setCurrentSearch(search: string) {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const search = event.target.value
+
     const url = new URL(window.location.toString())
     url.searchParams.set('search', search)
     window.history.pushState({}, "", url)
 
     setSearch(search)
-  }
-
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setCurrentSearch(event.target.value)
   }
 
   const filteredHeroes = search !== ''
@@ -112,19 +110,3 @@ export default function Home() {
     </>
   );
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   var enUsHeroes: HeroProps[] = []
-//   await api
-//     .get<HeroProps[]>(`/heroes?locale=en-us`)
-//     .then(response => { 
-//       enUsHeroes = response.data
-//     })
-
-//   return {
-//     props: {
-//       enUsHeroes
-//     },
-//     revalidate: 60 * 60 * 24, //24 hours
-//   }
-// }
