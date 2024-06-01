@@ -1,5 +1,6 @@
 import React, { useEffect, useState, startTransition } from 'react';
 import LoadingIcon from '../Loading/LoadingIcon';
+import Image from 'next/image';
 
 interface VideoToGifComponentProps {
   src: string;
@@ -22,7 +23,7 @@ const VideoToGifComponent = ({ src, poster, name }: VideoToGifComponentProps) =>
         <div className="absolute flex justify-center items-center bg-black/70 w-full h-full">
           <LoadingIcon className="size-2/12 opacity-70" />
         </div>
-        <img src={poster} alt={name} />
+        <Image src={poster} alt={name} width={640} height={360} />
       </div>
     );
   }

@@ -1,13 +1,14 @@
-import Link from "next/link";
-import HeroPortrait from "./HeroPortrait";
 import { HeroProps } from "@/types/hero";
+import Link from "next/link";
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
+import { HeroCardPortrait } from "./HeroCardPortrait";
 
 interface HeroCardProps {
   hero: HeroProps;
 }
 
-const HeroCard = ({ hero }: HeroCardProps) => {
+const HeroCardComponent = ({ hero }: HeroCardProps) => {
   const { t } = useTranslation()
 
   return ( 
@@ -17,7 +18,7 @@ const HeroCard = ({ hero }: HeroCardProps) => {
         border border-slate-400 dark:border-slate-700 hover:scale-105 transition-transform
         relative overflow-hidden
       `}>
-        <HeroPortrait
+        <HeroCardPortrait
           name={hero.name}
           portrait={hero.portrait}
           className="size-16"
@@ -43,4 +44,6 @@ const HeroCard = ({ hero }: HeroCardProps) => {
   );
 }
  
-export default HeroCard;
+export const HeroCard = memo(HeroCardComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.hero, nextProps.hero)
+});

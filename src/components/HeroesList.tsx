@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import HeroCard from "./HeroCard/HeroCard";
+import { HeroCard } from "./HeroCard/HeroCard";
 
 interface HeroProps {
   key: string;
