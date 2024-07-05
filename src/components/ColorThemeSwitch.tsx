@@ -31,7 +31,7 @@ const ColorThemeSwitch = ({ className }: { className?: string }) => {
     <button
       onClick={handleToggleThemeClick}
       aria-label={t('ColorTheme.ariaLabel')}
-      className={twMerge("p-[0.125rem] md:p-1 size-7 md:size-8 rounded-full bg-white dark:bg-slate-700 border border-slate-500 dark:border-slate-300 transition-all", className)}
+      className={twMerge("shrink-0 p-[0.125rem] md:p-1 size-7 md:size-8 rounded-full bg-white dark:bg-slate-700 border border-slate-500 dark:border-slate-300 transition-all", className)}
     >
       {colorTheme === "dark" ? (
         <BsSunFill className="fill-slate-300 size-full p-0.5" />

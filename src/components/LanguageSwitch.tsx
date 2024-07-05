@@ -29,7 +29,7 @@ const LanguageSwitch = ({ className }: { className?: string }) => {
       <button
         onClick={handleChangeLanguage}
         aria-label={t('Language.ariaLabel')}
-        className="size-7 md:size-8 rounded-full overflow-hidden transition-all"
+        className="shrink-0 size-7 md:size-8 rounded-full overflow-hidden transition-all"
       >
         {currentLanguage === "en_us" ? (
           <CircleFlag
