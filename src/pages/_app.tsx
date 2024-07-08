@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { queryClient } from "@/services/queryClient";
 import { axeAccessibilityReporter } from "@/services/axeAccessibilityReporter";
 import { useEffect } from "react";
+import { AddToHomeScreenButton } from "@/components/AddToHomeScreenButton";
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] })
 
@@ -26,6 +27,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <HeroesProvider>
             <ColorThemeProvider>
               <Component {...pageProps} />
+              
+              <AddToHomeScreenButton/>
             </ColorThemeProvider>
           </HeroesProvider>
         </LanguagesProvider>
