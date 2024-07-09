@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { GetServerSidePropsContext } from "next";
 import { useEffect, useState } from "react";
 import { getSelectorsByUserAgent } from "react-device-detect"
@@ -27,13 +28,7 @@ export const AddToHomeScreenButton = (props: any) => {
     if (prompt) {
       prompt.prompt();
 
-      prompt.userChoice.then((choiceResult: any) => {
-        if (choiceResult.outcome === "accepted") {
-          alert('Accepted')
-        } else {
-          alert('Cancelled')
-        }
-
+      prompt.userChoice.then(() => {
         setPrompt(null);
         setShowInstallModal(false)
       })
@@ -44,29 +39,48 @@ export const AddToHomeScreenButton = (props: any) => {
     setShowInstallModal(false)
   }
 
-  if (!showInstallModal || props.deviceType === 'desktop') return null;
+  if (!showInstallModal || props.deviceType === "desktop") return null;
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50'>
-      <div className='bg-white w-94 p-4 rounded-lg shadow-lg'>
-        <div className='flex gap-2 items-center'>
-          <button
-            onClick={handleInstallClick}
-            className='bg-blue-500 text-white px-4 py-2 rounded-lg'
-          >
-            Instalar
-          </button>
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="bg-slate-100 dark:bg-slate-900 w-94 p-4 rounded-xl">
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-1">
+            <h1 className="font-semibold">
+              {t("InstallButton.title")}
+            </h1>
 
-          <button
-            onClick={handleCloseClick}
-            className='bg-gray-300 text-gray-700 px-4 py-2 rounded-lg'
-          >
-            Fechar
-          </button>
+            <p>
+              {t("InstallButton.text")}
+            </p>
+          </div>
+
+          <div className="flex gap-2 items-center">
+            <button
+              onClick={handleInstallClick}
+              className="
+                bg-slate-700 hover:bg-slate-800 text-slate-100
+                px-4 py-2 rounded-lg transition-colors
+              "
+            >
+              {t("InstallButton.installButtonText")}
+            </button>
+
+            <button
+              onClick={handleCloseClick}
+              className="
+                bg-transparent border dark:border-slate-800 dark:hover:bg-slate-800 dark:text-slate-100
+              border-slate-400 hover:bg-slate-400 text-slate-900
+                px-[15px] py-[7px] rounded-lg transition-colors
+              "
+            >
+              {t("InstallButton.closeButtonText")}
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="fixed inset-0 bg-gray-900 opacity-80 -z-10 backdrop-blur"/>
+      <div className="fixed inset-0 bg-black opacity-80 -z-10 backdrop-blur"/>
     </div>
   )
 };
@@ -78,7 +92,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   
   return {
     props: {
-      deviceType: isMobile ? 'mobile' : 'desktop'
+      deviceType: isMobile ? "mobile" : "desktop"
     }
   }
 }

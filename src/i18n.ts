@@ -56,6 +56,12 @@ i18n
           Language: {
             ariaLabel: "Change language",
           },
+          InstallButton: {
+            title: "Install the App",
+            text: "Click the button below to install the app on your device.",
+            installButtonText: "Install",
+            closeButtonText: "Close",
+          }
         }
       },
       pt_br: {
@@ -104,6 +110,12 @@ i18n
           Language: {
             ariaLabel: "Mudar o idioma",
           },
+          InstallButton: {
+            title: "Instale o aplicativo",
+            text: "Clique no botão abaixo para instalar o aplicativo no seu dispositivo.",
+            installButtonText: "Instalar",
+            closeButtonText: "Fechar",
+          }
         }
       },
     },
