@@ -21,7 +21,7 @@ export const StoryChapters = ({ chapters }: StoryChaptersProps) => {
 
           <div className="grid gap-3 items-center justify-items-center">
             <p className={`
-              indent-2 lg:indent-4 text-justify text-sm lg:text-base
+              indent-2 lg:indent-4 text-justify text-sm lg:text-base [overflow-wrap:anywhere]
             `}>
               {chapter.content}
             </p>

@@ -10,7 +10,7 @@ interface StorySummaryProps {
 export const StorySummary = ({ name, story }: StorySummaryProps) => {
   return (
     <>
-      <p className="indent-2 lg:indent-4 text-justify text-sm lg:text-base">
+      <p className="indent-2 lg:indent-4 text-justify text-sm lg:text-base [overflow-wrap:anywhere]">
         {story?.summary}
       </p>
 
