@@ -12,4 +12,13 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .mask-fade-bottom {
+    mask-image: linear-gradient(
+      to bottom,
+      theme(colors.slate.900) 0%,
+      theme(colors.slate.900) calc(100% - 2.5rem),
+      transparent 100%
+    );
+  }
 }

@@ -20,7 +20,7 @@ export const OtherHeroesSection = ({ role, sameRoleHeroes, ready, isLoading }: O
   }
 
   return (
-    <section className="hidden sm:block" aria-label={t("HeroPage.otherHeroes.ariaLabel")}>
+    <section className="hidden sm:block -m-2 p-2" aria-label={t("HeroPage.otherHeroes.ariaLabel")}>
       <h3 className="text-xl font-semibold">
         {ready && (
           currentLanguage === "pt_br"
@@ -32,7 +32,7 @@ export const OtherHeroesSection = ({ role, sameRoleHeroes, ready, isLoading }: O
       <Divider className="opacity-50 mt-1 mb-3" />
 
       {!isLoading ? (
-        <HeroesList heroes={sameRoleHeroes.slice(0, 7)} className="grid-cols-1" />
+        <HeroesList heroes={sameRoleHeroes.slice(0, 7)} className="grid-cols-1 px-2" />
       ) : (
         <div className="w-full flex justify-center pt-4">
           <LoadingIcon className="size-1/6" />

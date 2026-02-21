@@ -5,7 +5,7 @@ import HeroesList from "@/components/HeroesList";
 import Divider from "@/components/Divider";
 import Footer from "@/components/Footer";
 import { HeroProps } from "@/types/hero";
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent, useEffect, useRef } from "react";
 import LanguageSwitch from "@/components/LanguageSwitch";
 import { useLanguages } from "@/hooks/useLanguages";
 import { useTranslation } from "react-i18next";
@@ -15,10 +15,13 @@ import { useQuery } from "react-query";
 import Header from "@/components/Header/Header";
 import SearchInput from "@/components/Header/SearchInput";
 import LoadingScreen from "@/components/Loading/LoadingScreen";
+import { twMerge } from "tailwind-merge";
 
 export default function Home() {
   const [search, setSearch] = useState('');
   const [heroes, setHeroes] = useState<HeroProps[]>([])
+  const [isAtBottom, setIsAtBottom] = useState(false)
+  const mainRef = useRef<HTMLElement>(null)
   const { currentLanguage } = useLanguages()
   const { t } = useTranslation();
   const { getAllHeroes } = useHeroes()
@@ -45,6 +48,18 @@ export default function Home() {
     const url = new URL(window.location.toString());
     const searchParam = url.searchParams.get('search') ?? '';
     setSearch(searchParam);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!mainRef.current) return
+      const { scrollTop, scrollHeight, clientHeight } = mainRef.current
+      setIsAtBottom(scrollHeight - scrollTop - clientHeight < 10)
+    }
+
+    const main = mainRef.current;
+    main?.addEventListener('scroll', handleScroll)
+    return () => main?.removeEventListener('scroll', handleScroll)
   }, []);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
@@ -76,10 +91,10 @@ export default function Home() {
         w-full px-1.5 py-3
         sm-480:px-3
         md:px-5
-        lg:max-w-5xl lg:py-6
+        lg:max-w-5xl lg:pt-6 lg:pb-4
         xl:max-w-6xl
         2xl:max-w-7xl
-        min-h-screen mx-auto flex flex-col gap-4"
+        h-dvh mx-auto flex flex-col gap-4 overflow-y-hidden"
       >
         {!isLoading ? (
           <>
@@ -95,7 +110,13 @@ export default function Home() {
 
             <Divider />
 
-            <main className="flex-1">
+            <main
+              ref={mainRef}
+              className={twMerge(
+                "flex-1 overflow-y-scroll no-scrollbar -m-2 p-2",
+                !isAtBottom && "mask-fade-bottom"
+              )}
+            >
               <HeroesList heroes={filteredHeroes} className="grid-cols-1 sm-480:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5" />
             </main>
 

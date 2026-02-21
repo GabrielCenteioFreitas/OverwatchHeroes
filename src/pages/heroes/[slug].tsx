@@ -160,10 +160,10 @@ const HeroPage = ({ slug }: HeroPageProps) => {
           w-full px-1.5 py-3
           sm-480:px-3
           md:px-5
-          lg:max-w-5xl lg:py-6
+          lg:max-w-5xl lg:pt-6 lg:pb-4
           xl:max-w-6xl
           2xl:max-w-7xl
-          min-h-screen mx-auto flex flex-col gap-4"
+          h-dvh mx-auto flex flex-col gap-4 overflow-y-hidden"
         >
           {!heroResponse.isLoading ? (
             <>
@@ -177,7 +177,7 @@ const HeroPage = ({ slug }: HeroPageProps) => {
 
               <Divider className="-mt-3 sm-480:-mt-2" />
 
-              <div className="flex-1 flex flex-col sm:flex-row gap-5">
+              <div className="flex-1 flex flex-col sm:flex-row gap-5 overflow-y-scroll no-scrollbar sm:overflow-y-hidden">
                 <Aside
                   hero={hero}
                   ready={ready}
